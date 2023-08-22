@@ -32,7 +32,7 @@ export const store = createStore<RootState> ({
     load: state => state.load,
   },
   mutations: {
-    setPerson(state:RootState, payload:Person[]) {
+    setPerson(state, payload:Person[]) {
       state.persons = payload.map((item:Person) => {
         item.favorite = state.favorites.some((person:Person) => {
           return person.name === item.name
@@ -40,7 +40,7 @@ export const store = createStore<RootState> ({
         return item
       })
     },
-    setPagination(state:RootState, payload) {
+    setPagination(state, payload) {
       const prev:number = typeof payload.previous === 'string' ? +payload.previous.split('=').slice(-1) : payload.previous
       const next:number = typeof payload.next === 'string' ? +payload.next.split('=').slice(-1) : payload.next
       state.pagination = {
@@ -48,12 +48,12 @@ export const store = createStore<RootState> ({
         prev: prev
       }
     },
-    addFavoritePerson(state:RootState, payload:Person) {
+    addFavoritePerson(state, payload:Person) {
       state.favorites.push(payload)
       payload.favorite = true
       localStorage.setItem('favoritesPersons', JSON.stringify(state.favorites))
     },
-    removeFavoritePerson(state:RootState, payload:Person) {
+    removeFavoritePerson(state, payload:Person) {
       payload.favorite = false
       state.favorites.forEach((item:Person, index:number) => {
         if (item.name === payload.name) {
@@ -69,13 +69,13 @@ export const store = createStore<RootState> ({
         return item
       })
     },
-    currentPerson(state:RootState, payload:Person) {
+    currentPerson(state, payload:Person) {
       state.current_persons = payload
     },
-    savePersons(state:RootState, payload:number) {
+    savePersons(state, payload:number) {
       state.person_cache.set(payload, state.persons)
     },
-    load(state:RootState, payload:boolean) {
+    load(state, payload:boolean) {
       state.load = payload
     },
   },
