@@ -1,8 +1,14 @@
-import Vuex, {StoreOptions} from 'vuex'
+import Vuex, {StoreOptions, Store} from 'vuex'
 import {RootState} from "@/store/types";
 import http from "@/http";
 import {AxiosError} from "axios";
 import {Person} from "@/types";
+
+import { InjectionKey } from 'vue'
+
+// define injection key
+export const key: InjectionKey<Store<RootState>> = Symbol()
+
 const store: StoreOptions<RootState> = {
   state: {
     persons: null,

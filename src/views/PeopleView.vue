@@ -4,8 +4,9 @@ import {computed, onBeforeMount} from "vue";
 import {useStore} from "vuex";
 import {Person} from "@/types";
 import {useRoute} from "vue-router";
+import {key} from "@/store";
 
-const store = useStore()
+const store = useStore(key)
 const route = useRoute()
 
 const personProperties = computed<string[]>(() => {

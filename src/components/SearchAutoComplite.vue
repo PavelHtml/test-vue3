@@ -3,12 +3,13 @@ import {ref} from 'vue'
 import {Person} from "@/types"
 import {useStore} from "vuex"
 import {useRouter} from "vue-router"
+import {key} from "@/store";
 interface Props {
   options: Person[] | null
 }
 defineProps<Props>()
 
-const store = useStore()
+const store = useStore(key)
 const router = useRouter()
 
 const search = ref<string>('')

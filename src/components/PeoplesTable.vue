@@ -4,8 +4,9 @@ import ButtonTest from "@/components/UI/ButtonTest.vue";
 import {Person} from "@/types";
 import {useStore} from "vuex";
 import {Pagination} from "@/store/types";
+import {key} from "@/store";
 
-const store = useStore()
+const store = useStore(key)
 interface Props {
   tableHead: Array<keyof Person>,
   tableContent: Person[] | null
