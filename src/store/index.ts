@@ -87,8 +87,8 @@ export const store = createStore<RootState> ({
         commit('setPagination', resp.data)
         commit('setPerson', resp.data.results)
         commit('savePersons', 1)
-      } catch (e) {
-        console.log((e as AxiosError).message)
+      } catch (e: any) {
+        console.error(e.message)
       }
       commit('load', false)
     },
@@ -106,8 +106,8 @@ export const store = createStore<RootState> ({
           const resp = await http.get(`api/people/?page=${id}`)
           commit('setPagination', resp.data)
           commit('setPerson', resp.data.results)
-        } catch (e) {
-          console.log((e as AxiosError).message)
+        } catch (e: any) {
+          console.error(e.message)
         }
       }
       commit('savePersons', id)
@@ -129,8 +129,8 @@ export const store = createStore<RootState> ({
       try {
         const resp = await http.get(`api/people/${id}`)
         commit('currentPerson', resp.data)
-      } catch (e) {
-        console.error((e as AxiosError).message)
+      } catch (e: any) {
+        console.error(e.message)
       }
     },
   }
