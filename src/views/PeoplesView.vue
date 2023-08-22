@@ -1,21 +1,34 @@
-<template>
-  <div class="wrap">
-    <PeoplesTable :table-content="getPeoples" :table-head="tableHead"/>
-  </div>
-</template>
 <script setup lang="ts">
-  import PeoplesTable from "@/components/PeoplesTable.vue";
-  import {useStore} from "vuex";
-  import {computed, onBeforeMount} from "vue";
-  const store = useStore();
-  const tableHead:string[] = ['name', 'height', 'mass', 'hair_color']
+import PeoplesTable from "@/components/PeoplesTable.vue";
+import {useStore} from "vuex";
+import {computed, onBeforeMount} from "vue";
+import SearchAutoComplite from "@/components/SearchAutoComplite.vue";
+import {Person} from "@/types";
 
-  const getPeoples = computed(() => {
-    return store.getters['peoples']
-  })
+const store = useStore();
+const tableHead: string[] = ['name', 'height', 'mass', 'hair_color']
+
+const getPeoples = computed<Person[]>(() => {
+  return store.getters['persons']
+})
+
+const searchPersons = computed(() => {
+  return store.getters['searchPersons']
+})
+
+const load = computed(() => {
+  return store.getters['load']
+})
 
 onBeforeMount(() => {
   store.dispatch('getPeoples')
 })
-
 </script>
+
+<template>
+  <div class="wrap">
+    <PeoplesTable v-if="!load" :table-content="getPeoples" :table-head="tableHead"/>
+    <p v-else>Загружается!</p>
+    <SearchAutoComplite :options="searchPersons"/>
+  </div>
+</template>

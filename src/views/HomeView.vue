@@ -1,11 +1,3 @@
-<template>
-  <div class="home">
-    <nav>
-      <router-link to="/peoples">peoples</router-link>
-      <router-link to="/favorites">favorites</router-link>
-    </nav>
-  </div>
-</template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
@@ -16,6 +8,15 @@ export default defineComponent({
   },
 });
 </script>
+
+<template>
+  <div class="home">
+    <nav>
+      <router-link to="/peoples">peoples</router-link>
+      <router-link to="/favorites">favorites</router-link>
+    </nav>
+  </div>
+</template>
 
 <style>
 nav {

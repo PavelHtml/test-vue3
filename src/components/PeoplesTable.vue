@@ -1,3 +1,31 @@
+<script lang="ts" setup>
+import {computed} from 'vue'
+import ButtonTest from "@/components/UI/ButtonTest.vue";
+import {Person} from "@/types";
+import {useStore} from "vuex";
+import {Pagination} from "@/store/types";
+
+const store = useStore()
+interface Props {
+  tableHead: Array<keyof Person>,
+  tableContent: Person[] | null
+}
+const props = defineProps<Props>();
+const addFavoritePerson = (person:Person) => {
+  store.commit('addFavoritePerson', person)
+}
+const removeFavoritePerson = (person:Person) => {
+  store.commit('removeFavoritePerson', person)
+}
+
+const pagination = computed(():Pagination => {
+  return store.getters['pagination']
+})
+const setPages = (id:number) => {
+  store.dispatch('getPeoplesPages', id)
+}
+</script>
+
 <template>
   <table class="table">
     <thead>
@@ -16,27 +44,11 @@
       </tr>
     </tbody>
   </table>
+  <div class="pagination">
+    <ButtonTest class="pagination__prev" v-if="pagination.prev" color="green" @click="setPages(pagination.prev)">Предидущая</ButtonTest>
+    <ButtonTest class="pagination__next" v-if="pagination.next" color="green" @click="setPages(pagination.next)">Следующая</ButtonTest>
+  </div>
 </template>
-
-<script lang="ts" setup>
-  import {defineProps} from 'vue'
-  import ButtonTest from "@/components/UI/ButtonTest.vue";
-  import {Person} from "@/types";
-  import {useStore} from "vuex";
-
-  const store = useStore()
-  interface Props {
-    tableHead: string[] | null,
-    tableContent: Person[] | null
-  }
-  const props = defineProps<Props>();
-  const addFavoritePerson = (person:Person):void => {
-    store.commit('addFavoritePerson', person)
-  }
-  const removeFavoritePerson = (person:Person):void => {
-    store.commit('removeFavoritePerson', person)
-  }
-</script>
 
 <style scoped>
 
@@ -49,4 +61,11 @@
   padding-top: 10px;
 }
 
+.pagination__prev {
+  float: left;
+}
+
+pagination__next {
+  float: right;
+}
 </style>
