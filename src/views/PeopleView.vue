@@ -12,7 +12,7 @@ const personProperties = computed<string[]>(() => {
   let objectKeys =  store.getters['currentPersons'] ? Object.keys(store.getters['currentPersons']) : []
   return objectKeys
 })
-const person = computed(():Person => {
+const person = computed<Person>(() => {
   return store.getters['currentPersons']
 })
 

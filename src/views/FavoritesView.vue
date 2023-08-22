@@ -2,10 +2,11 @@
 import PeoplesTable from "@/components/PeoplesTable.vue"
 import {useStore} from "vuex"
 import {computed} from "vue"
+import {Person} from "@/types";
 const store = useStore()
-const tableHead:string[] = ['name', 'height', 'mass', 'hair_color']
+const tableHead:Array<keyof Person> = ['name', 'height', 'mass', 'hair_color']
 
-const getPeoples = computed(() => {
+const getPeoples = computed<Person[]>(() => {
   return store.getters['favorites']
 })
 </script>

@@ -2,7 +2,7 @@
   import {Person} from "@/types"
 
   interface Props {
-    properties: Array<keyof Person>
+    properties: string[]
     values: Person | null
   }
   defineProps<Props>()

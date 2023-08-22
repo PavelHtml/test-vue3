@@ -6,17 +6,17 @@ import SearchAutoComplite from "@/components/SearchAutoComplite.vue";
 import {Person} from "@/types";
 
 const store = useStore();
-const tableHead: string[] = ['name', 'height', 'mass', 'hair_color']
+const tableHead:Array<keyof Person> = ['name', 'height', 'mass', 'hair_color']
 
 const getPeoples = computed<Person[]>(() => {
   return store.getters['persons']
 })
 
-const searchPersons = computed(() => {
+const searchPersons = computed<Person[]>(() => {
   return store.getters['searchPersons']
 })
 
-const load = computed(() => {
+const load = computed<boolean>(() => {
   return store.getters['load']
 })
 

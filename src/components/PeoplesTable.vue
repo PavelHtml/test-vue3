@@ -18,7 +18,7 @@ const removeFavoritePerson = (person:Person) => {
   store.commit('removeFavoritePerson', person)
 }
 
-const pagination = computed(():Pagination => {
+const pagination = computed<Pagination>(() => {
   return store.getters['pagination']
 })
 const setPages = (id:number) => {
