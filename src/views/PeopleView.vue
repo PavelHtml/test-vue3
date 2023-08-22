@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import PersonOptionList from "@/components/PersonOptionList.vue";
-import {computed, onBeforeMount} from "vue";
-import {useStore} from "vuex";
-import {Person} from "@/types";
-import {useRoute} from "vue-router";
-import {key} from "@/store";
+import PersonOptionList from "@/components/PersonOptionList.vue"
+import {computed, onBeforeMount} from "vue"
+import {useStore} from "vuex"
+import {Person} from "@/types"
+import {useRoute} from "vue-router"
+import {key} from "@/store"
 
 const store = useStore(key)
 const route = useRoute()

@@ -1,17 +1,17 @@
 <script lang="ts" setup>
 import {computed} from 'vue'
-import ButtonTest from "@/components/UI/ButtonTest.vue";
-import {Person} from "@/types";
-import {useStore} from "vuex";
-import {Pagination} from "@/store/types";
-import {key} from "@/store";
+import ButtonTest from "@/components/UI/ButtonTest.vue"
+import {Person} from "@/types"
+import {useStore} from "vuex"
+import {Pagination} from "@/store/types"
+import {key} from "@/store"
 
 const store = useStore(key)
 interface Props {
   tableHead: Array<keyof Person>,
   tableContent: Person[] | null
 }
-const props = defineProps<Props>();
+const props = defineProps<Props>()
 const addFavoritePerson = (person:Person) => {
   store.commit('addFavoritePerson', person)
 }

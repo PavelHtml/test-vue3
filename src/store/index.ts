@@ -1,7 +1,7 @@
-import { createStore, useStore as baseUseStore, Store } from 'vuex'
-import {RootState} from "@/store/types";
-import http from "@/http";
-import {Person} from "@/types";
+import { createStore, Store } from 'vuex'
+import {RootState} from "@/store/types"
+import http from "@/http"
+import {Person} from "@/types"
 
 import { InjectionKey } from 'vue'
 
@@ -143,7 +143,3 @@ export const store = createStore<RootState> ({
     },
   }
 })
-
-export function useStore() {
-  return baseUseStore(key)
-}

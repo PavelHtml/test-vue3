@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import PeoplesTable from "@/components/PeoplesTable.vue";
-import {useStore} from "vuex";
-import {computed, onBeforeMount} from "vue";
-import SearchAutoComplite from "@/components/SearchAutoComplite.vue";
-import {Person} from "@/types";
-import {key} from "@/store";
+import PeoplesTable from "@/components/PeoplesTable.vue"
+import {useStore} from "vuex"
+import {computed, onBeforeMount} from "vue"
+import SearchAutoComplite from "@/components/SearchAutoComplite.vue"
+import {Person} from "@/types"
+import {key} from "@/store"
 
-const store = useStore(key);
+const store = useStore(key)
 const tableHead:Array<keyof Person> = ['name', 'height', 'mass', 'hair_color']
 
 const getPeoples = computed<Person[]>(() => {

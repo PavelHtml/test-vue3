@@ -3,7 +3,7 @@ import {ref} from 'vue'
 import {Person} from "@/types"
 import {useStore} from "vuex"
 import {useRouter} from "vue-router"
-import {key} from "@/store";
+import {key} from "@/store"
 interface Props {
   options: Person[] | null
 }
