@@ -1,12 +1,10 @@
 import { createStore, useStore as baseUseStore, Store } from 'vuex'
 import {RootState} from "@/store/types";
 import http from "@/http";
-import {AxiosError} from "axios";
 import {Person} from "@/types";
 
 import { InjectionKey } from 'vue'
 
-// define injection key
 export const key: InjectionKey<Store<RootState>> = Symbol()
 
 export const store = createStore<RootState> ({
@@ -80,16 +78,26 @@ export const store = createStore<RootState> ({
     },
   },
   actions: {
-    async getPeoples({commit}) {
+    async getPeoples({commit, state}) {
       commit('load', true)
-      try {
-        const resp = await http.get('api/people')
-        commit('setPagination', resp.data)
-        commit('setPerson', resp.data.results)
-        commit('savePersons', 1)
-      } catch (e: any) {
-        console.error(e.message)
+      if (state.person_cache.get(1)) {
+        const pagination: object = {
+          next: 2,
+          previous: null
+        }
+        commit('setPerson', state.person_cache.get(1))
+        commit('setPagination', pagination)
+      } else {
+        try {
+          const resp = await http.get('api/people')
+          commit('setPagination', resp.data)
+          commit('setPerson', resp.data.results)
+          commit('savePersons', 1)
+        } catch (e: any) {
+          console.error(e.message)
+        }
       }
+
       commit('load', false)
     },
     async getPeoplesPages({commit, state}, id:number) {
