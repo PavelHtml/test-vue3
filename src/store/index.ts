@@ -1,4 +1,4 @@
-import Vuex, {StoreOptions, Store} from 'vuex'
+import { createStore, useStore as baseUseStore, Store } from 'vuex'
 import {RootState} from "@/store/types";
 import http from "@/http";
 import {AxiosError} from "axios";
@@ -9,7 +9,7 @@ import { InjectionKey } from 'vue'
 // define injection key
 export const key: InjectionKey<Store<RootState>> = Symbol()
 
-const store: StoreOptions<RootState> = {
+export const store = createStore<RootState> ({
   state: {
     persons: null,
     favorites: JSON.parse((localStorage.getItem('favoritesPersons') as string)) || [],
@@ -134,5 +134,8 @@ const store: StoreOptions<RootState> = {
       }
     },
   }
+})
+
+export function useStore() {
+  return baseUseStore(key)
 }
-export default new Vuex.Store<RootState>(store)
